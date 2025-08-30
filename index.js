@@ -18,11 +18,19 @@ app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(cookieParser());
 
 // console.log('@@@@@##', process.env.REACT_APP_API_URL);
+// app.use(cors({
+//   // origin: process.env.REACT_APP_API_URL,
+//   origin: "*",
+//   methods: "GET,POST"
+// }));
+
 app.use(cors({
-  // origin: process.env.REACT_APP_API_URL,
-  origin: "*",
-  methods: "GET,POST"
+  origin: ['https://pilgrimspath.azurewebsites.net', "http://localhost:8080"], 
+  methods: ["GET", "POST", "PUT", "DELETE"],
 }));
+
+// parse JSON
+app.use(express.json());
 
 /**
  * Connect to the database method call
