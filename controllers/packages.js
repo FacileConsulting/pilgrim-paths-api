@@ -46,7 +46,6 @@ exports.packages = async (req, res) => {
     const { packageId } = req.body;
     packageId ? delete req.body.packageId : null; 
     delete req.body.type;
-
     const settingsChange = async () => {
       const settings = await getSettings({ _id: '689d5ad061d5569a4efe288f' });
       console.log('dfdfdfssd', settings);
@@ -119,8 +118,8 @@ exports.packages = async (req, res) => {
       }
     } else if (type === packages.delete) {
       // Delete the document by ID
+      const packaged = await getPackage({ _id: packageId });
       const result = await deletePackage(packageId);
-      // console.log("$$$$$$$$$delte", result);
       if (result.deletedCount === 1) {
         const dashboard = await getDashboard({ _id: '6899669c88070a0970315bcc' });
         const result = await updateDashboard('6899669c88070a0970315bcc', {      
@@ -128,8 +127,8 @@ exports.packages = async (req, res) => {
             {
               time: new Date(),
               type: 'package',
-              name: req.body.packageProvider,
-              title: `Package Deleted: ${req.body.packageTitle}`,
+              name: packaged.packageProvider,
+              title: `Package Deleted: ${packaged.packageTitle}`,
               status: 'Deleted'
             }, 
             ...dashboard.activity]
