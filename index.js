@@ -18,15 +18,15 @@ app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(cookieParser());
 
 
-app.use(cors({
-  origin: "*",
-  methods: "GET,POST"
-}));
-
 // app.use(cors({
-//   origin: ['https://pilgrimspath.azurewebsites.net', "http://localhost:8080"], 
-//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   origin: "*",
+//   methods: "GET,POST"
 // }));
+
+app.use(cors({
+  origin: ['https://pilgrimspath.azurewebsites.net', "http://localhost:8080"], 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
 
 // parse JSON
 app.use(express.json());
