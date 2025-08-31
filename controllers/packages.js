@@ -42,7 +42,6 @@ exports.packages = async (req, res) => {
     if (stat) {
       return res.status(stat).json({ error: message });
     }
-    console.log('req.body', req.body);
     const type = req.body.type;
     const { packageId } = req.body;
     packageId ? delete req.body.packageId : null; 
